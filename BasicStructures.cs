@@ -185,6 +185,7 @@ namespace PatcherYRpp
     [Serializable]
     public struct CellStruct
     {
+        public static CellStruct Empty => new CellStruct(0, 0);
         public CellStruct(int x, int y)
         {
             X = (short)x;

@@ -19,7 +19,6 @@ namespace PatcherYRpp
 		[FieldOffset(156)] public int Burst;
         [FieldOffset(160)] public IntPtr projectile;
 		public Pointer<BulletTypeClass> Projectile { get => projectile; set => projectile = value; }
-
         [FieldOffset(164)] public int Damage;
 		[FieldOffset(168)] public int Speed;
         [FieldOffset(172)] public Pointer<WarheadTypeClass> Warhead;

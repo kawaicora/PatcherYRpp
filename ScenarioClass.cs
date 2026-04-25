@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,8 @@ namespace PatcherYRpp
     {
         private static IntPtr instance = new IntPtr(0xA8B230);
         static public ref ScenarioClass Instance { get => ref instance.Convert<Pointer<ScenarioClass>>().Ref.Ref; }
+        [FieldOffset(4480)] public byte houseIndices;
+        public FixedArray<int> HouseIndices => new(ref Unsafe.As<byte, int>(ref houseIndices), 16);
 
 
         [FieldOffset(4700)] public byte FileName_first;

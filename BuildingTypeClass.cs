@@ -10,7 +10,8 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 6040)]
     public struct BuildingTypeClass
     {
-
+        static public readonly IntPtr ArrayPointer = new IntPtr(0xA83C68);
+        static public YRPP.GLOBAL_DVC_ARRAY<BuildingTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<BuildingTypeClass>(ArrayPointer);
 
         public unsafe short GetFoundationWidth()
         {

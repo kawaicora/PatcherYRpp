@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using DynamicPatcher;
 using PatcherYRpp.FileFormats;
 
 namespace PatcherYRpp
@@ -26,8 +27,66 @@ namespace PatcherYRpp
         static public readonly IntPtr ArrayPointer = new IntPtr(0xA8EB00);
 
         static public YRPP.GLOBAL_DVC_ARRAY<TechnoTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<TechnoTypeClass>(ArrayPointer);
+        public static int GetIndexByAbstractTypeAndID(AbstractType abstractType,string id)
+        {
+            switch (abstractType)
+            {
+                case AbstractType.Unit:
+                case AbstractType.UnitType:
+                    for (int index = 0; index < UnitTypeClass.ABSTRACTTYPE_ARRAY.Array.Count; index++)
+                    {
+                        var item = UnitTypeClass.ABSTRACTTYPE_ARRAY.Array[index];
+                        if (item.Convert<AbstractTypeClass>().Ref.ID == id)
+                        {
+                            return index;
+                        }
+                    }
+                    break;
+                case AbstractType.Infantry:
+                case AbstractType.InfantryType:
+                    for (int index = 0; index < InfantryTypeClass.ABSTRACTTYPE_ARRAY.Array.Count; index++)
+                    {
+                        var item = InfantryTypeClass.ABSTRACTTYPE_ARRAY.Array[index];
+                        if (item.Convert<AbstractTypeClass>().Ref.ID == id)
+                        {
+                            return index;
+                        }
+                    }
+                    break;
+                case AbstractType.Building:
+                case AbstractType.BuildingType:
+                    for (int index = 0; index < BuildingTypeClass.ABSTRACTTYPE_ARRAY.Array.Count; index++)
+                    {
+                        var item = BuildingTypeClass.ABSTRACTTYPE_ARRAY.Array[index];
+                        if (item.Convert<AbstractTypeClass>().Ref.ID == id)
+                        {
+                            return index;
+                        }
+                    }
+                    break;
+                case AbstractType.Aircraft:
+                case AbstractType.AircraftType:
+                    for (int index = 0; index < AircraftTypeClass.ABSTRACTTYPE_ARRAY.Array.Count; index++)
+                    {
+                        var item = AircraftTypeClass.ABSTRACTTYPE_ARRAY.Array[index];
+                        if (item.Convert<AbstractTypeClass>().Ref.ID == id)
+                        {
+                            return index;
+                        }
+                    }
+                    break;
+                default:
+                    return 0;
+            }
+            return 0;
+        }
 
-
+        public static unsafe Pointer<TechnoTypeClass> GetByTypeAndIndex(AbstractType abs, int index)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, AbstractType,int, IntPtr>)ASM.FastCallTransferStation;
+            return func(0x48DCD0, abs, index);
+        }
+        
         public unsafe bool CanAttackMove()
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoTypeClass, Bool>)this.GetVirtualFunctionPointer(41);
@@ -109,6 +168,9 @@ namespace PatcherYRpp
 
         [FieldOffset(3434)] public Bool BalloonHover;
         [FieldOffset(3476)] public Bool JumpJet;
+
+        [FieldOffset(3278)] public Bool IsNaval;
+
 
     }
 }

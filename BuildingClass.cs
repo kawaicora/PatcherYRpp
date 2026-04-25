@@ -19,7 +19,6 @@ namespace PatcherYRpp
         [FieldOffset(0)] public MissionClass BaseMission;
         [FieldOffset(0)] public ObjectClass BaseObject;
         [FieldOffset(0)] public AbstractClass BaseAbstract;
-
         [FieldOffset(1312)] public Pointer<BuildingTypeClass> Type;
 
         [FieldOffset(1632)] public Bool HasPower;

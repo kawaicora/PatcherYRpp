@@ -151,7 +151,17 @@ namespace PatcherYRpp
         NW = 0x7,
         NorthWest = 0x7,
     };
+    public enum DRAWTEXTCOLOR : ushort
+    {
+        COLOR_BLACK = 0x0000,
+        COLOR_WHITE = 0xFFFF,
 
+        COLOR_RED = 0xF800,
+        COLOR_GREEN = 0x07E0,
+        COLOR_BLUE = 0x001F,
+
+        COLOR_PURPLE = COLOR_RED | COLOR_BLUE
+    }
     public enum SpotlightFlags
     {
         None = 0x0,
@@ -244,7 +254,7 @@ namespace PatcherYRpp
         Zero = 0x10000,
         Nonzero = 0x20000
     };
-
+    
     public enum VisualType
     {
         Normal = 0,
@@ -436,6 +446,60 @@ namespace PatcherYRpp
         QueryCanTote = 36, // Want ride
     };
 
+
+    public enum BuildCat : uint
+    {
+        //不在乎
+        DontCare = 0,
+
+        // 科技
+        Tech = 1,
+
+        //资源
+        Resoure = 2,
+
+        //电量
+        Power = 3,
+
+        // 基础设施
+        Infrastructure = 4,
+
+        // 战斗
+        Combat = 5
+    }
+
+    public enum MouseHotSpotX
+    {
+        Left = 0,
+        Center = 12345,
+        Right = 54321
+    }
+    public enum MouseHotSpotY
+    {
+        Top = 0,
+        Middle = 12345,
+        Bottom = 54321
+    }
+
+    public enum RadarEventType : int {
+        Combat = 0,
+        Noncombat = 1,
+        DropZone = 2,
+        BaseAttacked = 3,
+        HarvesterAttacked = 4,
+        EnemySensed = 5,
+        UnitProduced = 6,
+        UnitLost = 7,
+        UnitRepaired = 8,
+        BuildingInfiltrated = 9,
+        BuildingCaptured = 10,
+        BeaconPlaced = 11,
+        SuperweaponDetected = 12,
+        SuperweaponActivated = 13,
+        BridgeRepaired = 14,
+        GarrisonAbandoned = 15,
+        AllyBaseAttacked = 16
+    };
     public enum NetworkEvents
     {
         Empty = 0x0,
@@ -485,6 +549,7 @@ namespace PatcherYRpp
         PlanNodeDelete = 0x2C,
         AllCheer = 0x2D,
         AbandonAll = 0x2E
+        
     };
 
     public enum Edge
@@ -496,7 +561,7 @@ namespace PatcherYRpp
         West = 3,
         Air = 4
     };
-
+    
     public enum GameMode
     {
         Campaign = 0x0,
@@ -506,4 +571,178 @@ namespace PatcherYRpp
         Internet = 0x4,
         Skirmish = 0x5,
     };
+
+    public enum AIDifficulty
+    {
+        Hard = 0,
+        Normal = 1,
+        Easy = 2
+    }
+
+    public enum SAction : uint {
+        None = 0,
+        Move = 1,
+        NoMove = 2,
+        Enter = 3,
+        Self_Deploy = 4,
+        Attack = 5,
+        Harvest = 6,
+        Select = 7,
+        ToggleSelect = 8,
+        Capture = 9,
+        Eaten = 10,
+        Repair = 11,
+        Sell = 12,
+        SellUnit = 13,
+        NoSell = 14,
+        NoRepair = 15,
+        Sabotage = 16,
+        Tote = 17,
+        DontUse2 = 18,
+        DontUse3 = 19,
+        Nuke = 20,
+        DontUse4 = 21,
+        DontUse5 = 22,
+        DontUse6 = 23,
+        DontUse7 = 24,
+        DontUse8 = 25,
+        GuardArea = 26,
+        Heal = 27,
+        Damage = 28,
+        GRepair = 29,
+        NoDeploy = 30,
+        NoEnter = 31,
+        NoGRepair = 32,
+        TogglePower = 33,
+        NoTogglePower = 34,
+        EnterTunnel = 35,
+        NoEnterTunnel = 36,
+        IronCurtain = 37,
+        LightningStorm = 38,
+        ChronoSphere = 39,
+        ChronoWarp = 40,
+        ParaDrop = 41,
+        PlaceWaypoint = 42,
+        TibSunBug = 43,
+        EnterWaypointMode = 44,
+        FollowWaypoint = 45,
+        SelectWaypoint = 46,
+        LoopWaypointPath = 47,
+        DragWaypoint = 48,
+        AttackWaypoint = 49,
+        EnterWaypoint = 50,
+        PatrolWaypoint = 51,
+        AreaAttack = 52,
+        IvanBomb = 53,
+        NoIvanBomb = 54,
+        Detonate = 55,
+        DetonateAll = 56,
+        DisarmBomb = 57,
+        SelectNode = 58,
+        AttackSupport = 59,
+        PlaceBeacon = 60,
+        SelectBeacon = 61,
+        AttackMoveNav = 62,
+        AttackMoveTar = 63,
+        Demolish = 64,
+        AmerParaDrop = 65,
+        PsychicDominator = 66,
+        SpyPlane = 67,
+        GeneticConverter = 68,
+        ForceShield = 69,
+        NoForceShield = 70,
+        Airstrike = 71,
+        PsychicReveal = 72
+    }
+
+    
+    public enum Powerup
+    {
+        Money = 0,
+        Unit = 1,
+        HealBase = 2,
+        Cloak = 3,
+        Explosion = 4,
+        Napalm = 5,
+        Squad = 6,
+        Darkness = 7,
+        Reveal = 8,
+        Armor = 9,
+        Speed = 10,
+        Firepower = 11,
+        ICBM = 12,
+        Invulnerability = 13,
+        Veteran = 14,
+        IonStorm = 15,
+        Gas = 16,
+        Tiberium = 17,
+        Pod = 18
+    }
+
+    [Flags]
+    public enum SoundControl : uint
+    {
+        None = 0x0,
+        Loop = 0x1,
+        Random = 0x2,
+        All = 0x4,
+        Predelay = 0x8,
+        Interrupt = 0x10,
+        Attack = 0x20,
+        Decay = 0x40,
+        Ambient = 0x80
+    }
+
+    [Flags]
+    public enum SoundType: uint
+    {
+        Normal = 0x0,
+        Violent = 0x1,
+        Movement = 0x2,
+        Quiet = 0x4,
+        Loud = 0x8,
+        Global = 0x10,
+        Screen = 0x20,
+        Local = 0x40,
+        Player = 0x80,
+        NoiseShy = 0x100,
+        GunShy = 0x200,
+        Unshroud = 0x400,
+        Shroud = 0x800,
+        Ambient = 0x1000
+    }
+
+    [Flags]
+    public enum SoundPriority : int
+    {
+        Lowest = 0,
+        Low = 1,
+        Normal = 2,
+        High = 3,
+        Critical = 4
+    }
+
+    
+    public enum BehavesLike : int
+    {
+        Smoke = 0,
+        Gas = 1,
+        Fire = 2,
+        Spark = 3,
+        Railgun = 4
+    }
+
+    public enum DanmuType : byte
+    {
+        Message = 0,
+        Private = 1,
+        Like = 2,
+        Gift = 3,
+        EnterRoom = 4,
+        Follow = 5,
+        Share = 6,
+        SuperChat = 7   
+        
+    }
+
 }

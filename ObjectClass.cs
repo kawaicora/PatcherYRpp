@@ -10,6 +10,10 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 172)]
     public struct ObjectClass
     {
+        //虚表地址 0x007EF060
+        //找Put  = 0x007EF060 + 54 * 4
+        //       = 0x007EF060 + 0xD8
+        //       = 0x007EF138
         static public readonly IntPtr CurrentObjectsPointer = new IntPtr(0xA8ECB8);
         static public ref DynamicVectorClass<Pointer<ObjectClass>> CurrentObjects { get => ref DynamicVectorClass<Pointer<ObjectClass>>.GetDynamicVector(CurrentObjectsPointer); }
 
@@ -93,7 +97,17 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, void>)this.GetVirtualFunctionPointer(63);
             func(ref this);
         }
+        public unsafe KickOutResult KickOutUnit()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, KickOutResult>)this.GetVirtualFunctionPointer(64);
+            return func(ref this);
+        }
 
+        public unsafe void DrawAgain(Pointer<Point2D> pLocation, Pointer<RectangleStruct> pBounds)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, IntPtr,IntPtr,void>)this.GetVirtualFunctionPointer(70);
+            func(ref this, pLocation, pBounds);
+        }
         public unsafe void Undiscover()
         {
             var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, void>)this.GetVirtualFunctionPointer(71);

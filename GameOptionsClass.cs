@@ -24,7 +24,6 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Thiscall]<ref GameOptionsClass, void>)0x5FA620;
             func(ref this);
         }
-
         [FieldOffset(0)] public int GameSpeed;
         [FieldOffset(4)] public int Difficulty;
         [FieldOffset(8)] public int CampDifficulty;

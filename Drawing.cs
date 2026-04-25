@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using DynamicPatcher;
 
 namespace PatcherYRpp
 {
@@ -60,5 +61,33 @@ namespace PatcherYRpp
         [FieldOffset(36)] public int CurrentBaseZ;
         [FieldOffset(40)] public int Width;
         [FieldOffset(44)] public int Height;
+    }
+
+    public struct DrawingClass
+    {
+        // static RectangleStruct* __fastcall GetTextDimensions(
+		// RectangleStruct* pOutBuffer, wchar_t const* pText, Point2D location,
+		// WORD flags, int marginX = 0, int marginY = 0)
+		// 	{ JMP_STD(0x4A59E0); }
+
+        public static unsafe Pointer<RectangleStruct> GetTextDimensions(string text,Point2D location,ushort flag,int marginX = 0 , int marginY = 0 )
+        {
+            RectangleStruct outBuffer = default;
+      
+            var func = (delegate* unmanaged[Thiscall]<
+            int,
+            IntPtr, //pOutBuffer
+            IntPtr, //pText
+            IntPtr, //location
+            ushort, //flag
+            int ,//marginX
+            int,//marginY
+            IntPtr //ret
+            >)ASM.FastCallTransferStation;
+            IntPtr strPtr = Marshal.StringToHGlobalUni(text);
+            var result = func(0x4A59E0,Pointer<RectangleStruct>.AsPointer(ref outBuffer), strPtr , Pointer<Point2D>.AsPointer(ref location),flag,marginX,marginY);
+            Marshal.FreeHGlobal(strPtr);
+            return result;
+        }
     }
 }

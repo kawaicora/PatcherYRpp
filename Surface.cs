@@ -1,6 +1,8 @@
 ﻿using DynamicPatcher;
+using Microsoft.VisualStudio.OLE.Interop;
 using PatcherYRpp.FileFormats;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -146,6 +148,26 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Thiscall]<ref Surface, int>)this.GetVirtualFunctionPointer(32);
             return func(ref this);
         }
+
+
+        public static unsafe void DrawText(Pointer<Point2D> pOutBuffer,IntPtr text, Pointer<Surface> pSurface, Pointer<RectangleStruct> boundingRect,Pointer<Point2D> location, ushort color, uint SURFACE_SETTING_THREE= 0 , int flag = 0x16)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, IntPtr, IntPtr, IntPtr, IntPtr, IntPtr, ushort,   uint, int, uint, void>)ASM.FastCallTransferStation;
+            func(0x4A5EB0, pOutBuffer, text, pSurface, boundingRect, location, color, SURFACE_SETTING_THREE,flag,1);
+        }
+
+        public unsafe void DrawText(string text, Point2D location, ushort color, uint SURFACE_SETTING_THREE= 0 , int flag = 0x16)
+        {
+            Point2D buffer = default;  
+            RectangleStruct rect = this.GetRect();
+            IntPtr strPtr = Marshal.StringToHGlobalUni(text);
+            var pBuffer = Pointer<Point2D>.AsPointer(ref buffer);
+            var pRect = Pointer<RectangleStruct>.AsPointer(ref rect);
+            var pLocation = Pointer<Point2D>.AsPointer(ref location);
+            Surface.DrawText( pBuffer,strPtr,this.GetThisPointer(),pRect,pLocation,color,SURFACE_SETTING_THREE,flag);
+            Marshal.FreeHGlobal(strPtr);
+        }
+
 
         public unsafe void DrawSHP(Pointer<SHPStruct> pSHP, int nFrame, Pointer<ConvertClass> pPalette, int X, int Y)
         {

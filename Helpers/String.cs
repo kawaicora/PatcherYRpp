@@ -210,7 +210,26 @@ namespace PatcherYRpp
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator UniStringPointer(UniString str) => (IntPtr)str;
 
-
+        
         public override string ToString() => this;
     }
+
+    // public class StringTools
+    // {
+    //     public static UniString ToUniString(string str)
+    //     {
+    //         Encoding uni = Encoding.Unicode; 
+    //         byte[] strBytes = uni.GetBytes(str);
+
+    //         return uni.GetString(strBytes);
+    //     }
+
+    //     public static AnsiString ToAnsiString(string str)
+    //     {
+    //         Encoding t = Encoding.ASCII; 
+    //         byte[] strBytes = t.GetBytes(str);
+
+    //         return t.GetString(strBytes);
+    //     }
+    // }
 }

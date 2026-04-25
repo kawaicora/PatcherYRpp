@@ -410,4 +410,10 @@ namespace PatcherYRpp
         public TimerStruct Timer; // counts rotation steps
         public DirStruct ROT; // Rate of Turn. INI Value * 256
     }
+
+    public struct TypeList<T>
+    {
+        public static ref TypeList<T> From(Pointer<byte> first) =>
+            ref first.Convert<TypeList<T>>().Ref;
+    }
 }

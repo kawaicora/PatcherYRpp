@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audio.cs" />
     <Compile Include="AbstractClass.cs" />
     <Compile Include="AbstractTypeClass.cs" />
     <Compile Include="AircraftClass.cs" />
@@ -92,6 +93,8 @@
     <Compile Include="ConvertClass.cs" />
     <Compile Include="Dependencies\DirectDraw.cs" />
     <Compile Include="Drawing.cs" />
+    <Compile Include="DisplayClass.cs" />
+    <Compile Include="EventClass.cs" />
     <Compile Include="FileFormats\SHPStruct.cs" />
     <Compile Include="FileSystem.cs" />
     <Compile Include="FlyLocomotionClass.cs" />
@@ -109,6 +112,9 @@
     </Compile>
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Helpers\Cast.cs" />
+    <Compile Include="Helpers\FixedArray.cs" />
+    <Compile Include="Helpers\GlobalDvcArray.cs" />
+    
     <Compile Include="Helpers\Pointer.cs" />
     <Compile Include="Helpers\PointerEnumerator.cs" />
     <Compile Include="Helpers\PointerHandle.cs" />
@@ -116,6 +122,7 @@
     <Compile Include="Helpers\YRClassHandle.cs" />
     <Compile Include="HouseClass.cs" />
     <Compile Include="HouseTypeClass.cs" />
+    <Compile Include="INetworkHandle.cs" />
     <Compile Include="InfantryClass.cs" />
     <Compile Include="InfantryTypeClass.cs" />
     <Compile Include="Interfaces.cs" />
@@ -125,33 +132,66 @@
     <Compile Include="MessageListClass.cs" />
     <Compile Include="MissionClass.cs" />
     <Compile Include="MixFileClass.cs" />
+    <Compile Include="MouseClass.cs" />
     <Compile Include="MPGameModeClass.cs" />
     <Compile Include="MPTeams.cs" />
+
+    <Compile Include="NetworkHandle.cs" />
     <Compile Include="ObjectClass.cs" />
     <Compile Include="ObjectTypeClass.cs" />
     <Compile Include="OverlayTypeClass.cs" />
+    <Compile Include="ParticleClass.cs" />
+    <Compile Include="ParticleTypeClass.cs" />
+    <Compile Include="ParticleSystemClass.cs" />
     <Compile Include="ParticleSystemTypeClass.cs" />
+    <Compile Include="PowerClass.cs" />
+    <Compile Include="RadarClass.cs" />
+    <Compile Include="RadarEventClass.cs" />
     <Compile Include="RadioClass.cs" />
     <Compile Include="RulesClass.cs" />
     <Compile Include="ScenarioClass.cs" />
+    <Compile Include="ScriptClass.cs" />
+    <Compile Include="ScriptTypeClass.cs" />
     <Compile Include="SessionClass.cs" />
     <Compile Include="SideClass.cs" />
+    <Compile Include="SmudgeClass.cs" />
+    <Compile Include="SmudgeTypeClass.cs" />
+    <Compile Include="SidebarClass.cs" />
     <Compile Include="SpawnManagerClass.cs" />
+
     <Compile Include="SuperClass.cs" />
     <Compile Include="SuperWeaponTypeClass.cs" />
     <Compile Include="Surface.cs" />
     <Compile Include="SwizzleManagerClass.cs" />
     <Compile Include="TacticalClass.cs" />
+    <Compile Include="TActionClass.cs" />
     <Compile Include="TagClass.cs" />
+    <Compile Include="TagTypeClass.cs" />
+    <Compile Include="TargetClass.cs" />
+    
+    <Compile Include="TaskForceClass.cs" />
+    
+    <Compile Include="TeamClass.cs" />
+    <Compile Include="TeamTypeClass.cs" />
+    
     <Compile Include="TechnoClass.cs" />
     <Compile Include="TechnoTypeClass.cs" />
     <Compile Include="TerrainClass.cs" />
     <Compile Include="TerrainTypeClass.cs" />
+    <Compile Include="TEventClass.cs" />
+    <Compile Include="TriggerClass.cs" />
+    <Compile Include="TriggerTypeClass.cs" />
+    
     <Compile Include="UnitClass.cs" />
     <Compile Include="UnitTypeClass.cs" />
     <Compile Include="Unsorted.cs" />
+    <Compile Include="VocClass.cs" />
+    <Compile Include="VoxelAnimClass.cs" />
+    <Compile Include="VoxelAnimTypeClass.cs" />
     <Compile Include="WarheadTypeClass.cs" />
     <Compile Include="WeaponTypeClass.cs" />
+    <Compile Include="FactoryClass.cs" />
+    <Compile Include="WWMouseClass.cs" />
     <Compile Include="YRMemory.cs" />
     <Compile Include="YRMemory.Instantiator.g.cs">
       <AutoGen>True</AutoGen>

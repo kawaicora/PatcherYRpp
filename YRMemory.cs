@@ -117,7 +117,6 @@ namespace PatcherYRpp
                 MethodInfo constructor = type.GetMethod("Constructor", paramTypes);
 
                 constructor.Invoke(null, paramList);
-
                 return ptr;
             }
             catch (Exception)

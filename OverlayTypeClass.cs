@@ -10,6 +10,9 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 700)]
     public struct OverlayTypeClass
     {
+		static public readonly IntPtr ArrayPointer = new IntPtr(0xA83D80);
+        static public YRPP.GLOBAL_DVC_ARRAY<OverlayTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<OverlayTypeClass>(ArrayPointer);
+
         [FieldOffset(0)] public ObjectTypeClass Base;
 		[FieldOffset(0)] public AbstractTypeClass BaseAbstractType;
 
