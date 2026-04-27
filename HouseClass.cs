@@ -367,6 +367,9 @@ namespace PatcherYRpp
 
         [FieldOffset(176)] public byte absorbers;
         public ref DynamicVectorClass<Pointer<BuildingClass>> Absorbers => ref Pointer<byte>.AsPointer(ref absorbers).Convert<DynamicVectorClass<Pointer<BuildingClass>>>().Ref;
+        [FieldOffset(195)] public int Money;
+        
+
 
         [FieldOffset(200)] public byte bunkers;
         public ref DynamicVectorClass<Pointer<BuildingClass>> Bunkers => ref Pointer<byte>.AsPointer(ref bunkers).Convert<DynamicVectorClass<Pointer<BuildingClass>>>().Ref;
