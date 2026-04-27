@@ -14,7 +14,18 @@ namespace PatcherYRpp
 		static public readonly IntPtr ArrayPointer = new IntPtr(0xA8E330);
 
 		static public YRPP.GLOBAL_DVC_ARRAY<SuperWeaponTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<SuperWeaponTypeClass>(ArrayPointer);
-
+		public static int GetIndexByID(string id)
+        {
+           for (int index = 0; index < ABSTRACTTYPE_ARRAY.Array.Count; index++)
+			{
+				var item = ABSTRACTTYPE_ARRAY.Array[index];
+				if (item.Convert<AbstractTypeClass>().Ref.ID == id)
+				{
+					return index;
+				}
+			}
+			return -1;
+        }
 		[FieldOffset(0)] public AbstractTypeClass Base;
 
 		[FieldOffset(152)] public int ArrayIndex;
