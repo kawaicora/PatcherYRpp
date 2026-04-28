@@ -215,7 +215,6 @@ namespace PatcherYRpp
         [FieldOffset(0)] public SpecialPlace SpecialPlace;
         [FieldOffset(0)] public Specific Specific;
         
-        [FieldOffset(0)] public Danmu Danmu;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 104)]
@@ -329,29 +328,7 @@ namespace PatcherYRpp
     }
 
 
-    [StructLayout(LayoutKind.Explicit, Size = 104)]
-    public struct Danmu
-    {
-        [FieldOffset(0)] public int ID;
-        [FieldOffset(4)] public DanmuType Type; // 0:普通消息 1.私信 2:点赞 3:礼物 4:进入直播间 5:关注 6:分享 
 
-        [FieldOffset(8)] public UniStringPointer TypeName;
-
-        [FieldOffset(12)] public UniStringPointer GiftName; // 礼物名称
-        [FieldOffset(16)] public int Count; // 礼物数量
-
-        [FieldOffset(20)] public int GiftType; // 礼物类型
-        
-        [FieldOffset(24)] public UniStringPointer Uid;
-        [FieldOffset(28)] public UniStringPointer Nickname;
-       
-        [FieldOffset(32)] public UniStringPointer TergetID;
-
-        [FieldOffset(36)] public UniStringPointer TergetNickname;
-
-        [FieldOffset(40)] public UniStringPointer Message;
-       
-    }
 
     public static class Import
     {
