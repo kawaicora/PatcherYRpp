@@ -187,17 +187,6 @@ namespace PatcherYRpp
     {
         static public readonly IntPtr ArrayPointer = new IntPtr(0xA8EC78);
         static public ref DynamicVectorClass<Pointer<TechnoClass>> Array { get => ref DynamicVectorClass<Pointer<TechnoClass>>.GetDynamicVector(ArrayPointer); }
-        public static unsafe IntPtr TechnoClass_CTOR(Pointer<HouseClass> owner)  //HouseClass
-        {
-            // 分配对象内存（游戏标准分配方式）
-            IntPtr pThis = Marshal.AllocHGlobal(Marshal.SizeOf<TechnoTypeClass>()); 
-            var func = (delegate* unmanaged[Thiscall]<
-                IntPtr,
-                IntPtr,
-                IntPtr>)0x6F2B40;
-
-            return func(pThis, owner);
-        }
         public unsafe Pointer<TechnoTypeClass> Type
         {
             get

@@ -214,6 +214,7 @@ namespace PatcherYRpp
         [FieldOffset(0)] public Place Place;
         [FieldOffset(0)] public SpecialPlace SpecialPlace;
         [FieldOffset(0)] public Specific Specific;
+        
         [FieldOffset(0)] public Danmu Danmu;
     }
 
