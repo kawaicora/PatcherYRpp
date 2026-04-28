@@ -95,7 +95,17 @@ namespace PatcherYRpp
             return result;
         }
 
+        public unsafe void RegisterGain(Pointer<TechnoClass> pTechno, bool ownerChange)
+        {
+            var func = (delegate* unmanaged[Thiscall]<nint, nint, bool, void>)0x502A80;
+            func(this.GetThisPointer(), pTechno, ownerChange);
+        }
 
+        public unsafe void RegisterLoss(Pointer<TechnoClass> pTechno, bool keepTiberium)
+        {
+            var func = (delegate* unmanaged[Thiscall]<nint, nint, bool, void>)0x5025F0;
+            func(this.GetThisPointer(), pTechno, keepTiberium);
+        }
         public unsafe void TakeMoney(int amount)
         {
             var func = (delegate* unmanaged[Thiscall]<IntPtr, int, void>)0x4F9790;

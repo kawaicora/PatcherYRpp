@@ -1,6 +1,8 @@
 using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.ExceptionServices;
 using System.Runtime.InteropServices;
+using DynamicPatcher;
 
 namespace PatcherYRpp
 {
@@ -8,53 +10,41 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 111)]
     public struct EventClass
     {
-
-        public static EventClass EventClass_CTOR()
-        {
-            EventClass obj = new EventClass();
-            IntPtr ptr = Marshal.AllocHGlobal(111);
-            Marshal.Copy(new byte[111], 0, ptr, 111);
-            obj = Marshal.PtrToStructure<EventClass>(ptr);
-            Marshal.FreeHGlobal(ptr);
-            return obj;
-        }
-        // public static unsafe EventClass EventClass_CTOR()
-        // {
-        //     // 直接创建结构体
-        //     EventClass obj = new EventClass();
-
-        //     // 取地址（正确写法，不会报 fixed 错误）
-        //     byte* p = (byte*)&obj;
-
-        //     // 111 字节全部清零 = memset(this,0,111)
-        //     for (int i = 0; i < 111; i++)
-        //         p[i] = 0;
-
-        //     return obj;
-        // }
         private const nint OutListPoint = 0xA802C8;
         public static ref EventList OutList => ref OutListPoint.Convert<EventList>().Ref;
-
+       
         /// <summary>
         /// 添加事件
         /// </summary>
         /// <param name="event">事件</param>
         public static bool AddEvent(in EventClass @event)
         {
-            if (OutList.Count >= 127)
+            if (OutList.Count < 128)
+            {
+                Pointer<EventClass> pEvent= OutList.GetEvent(false);
+                pEvent.Ref = @event;
+                // Pointer<int> pTiming = OutList.GetTimings(false);   //!!!!!!!设置就崩溃直接把其他给复写了 
+                // pTiming.Ref = (int)Import.timeGetTime();
+                OutList.Count++;
+                // 添加调试信息
+                Logger.Log($"写入事件: Tail={OutList.Tail}, Count={OutList.Count}");
+                // 如果需要打印16进制数据
+                Logger.Log($"CurrentEvent地址: 0x{(int)pEvent:X8}");
+                // Logger.Log($"CurrentTimings地址: 0x{(int)pTiming:X8}");
+                OutList.Tail = (OutList.Tail + 1) & 0x7F;
+                return true;
+            }
+            else
             {
                 return false;
             }
 
-            OutList.GetEvent(false).Ref = @event;
-
-            OutList.GetTimings(false).Ref = (int)Import.timeGetTime();
-            ++OutList.Count;
-            OutList.Tail = (OutList.Tail + 1) & 127;
-            return true;
-        } /**/
+            
 
 
+
+        }
+       
         public unsafe Pointer<EventClass> EventClass_Special(int houseIndex, int id)
         {
             var func = (delegate* unmanaged[Thiscall]<nint, int, int, nint>)0x4C65A0;

@@ -210,6 +210,7 @@ namespace PatcherYRpp
         Pointer<TechnoTypeClass> IOwnAbstractType<TechnoTypeClass>.OwnType => Type;
         Pointer<AbstractTypeClass> IOwnAbstractType.AbstractType => Type.Convert<AbstractTypeClass>();
 
+   
         public unsafe bool CanReachLocation(CoordStruct destCoords)
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, ref CoordStruct, Bool>)this.GetVirtualFunctionPointer(179);
