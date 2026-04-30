@@ -219,8 +219,6 @@ namespace PatcherYRpp
         [FieldOffset(0)] public AbstractClass Base;
         [FieldOffset(36)] public ProgressTimer Production;
 
-        // [FieldOffset(60)] public int  StepProgress; // progress within the current step, in frames. resets to 0 when a new step starts
-
         [FieldOffset(64)] public byte queuedObjects;
         public ref DynamicVectorClass<Pointer<TechnoTypeClass>> QueuedObjects => ref Pointer<byte>.AsPointer(ref queuedObjects).Convert<DynamicVectorClass<Pointer<TechnoTypeClass>>>().Ref;
 
@@ -241,21 +239,12 @@ namespace PatcherYRpp
 
         [FieldOffset(112)] public byte IsSuspended;
         [FieldOffset(113)] public byte IsManual;
-        public static Action<Pointer<FactoryClass>> ProgressAddCallback = (factory) =>{};
-        public static Action<Pointer<FactoryClass>> CreateCallback = (factory) =>{};
-        public static Action<Pointer<FactoryClass>> DemandProductionCallback = (factory) =>{};
-        public static unsafe UInt32 FactoryClass_ProgressAdd_Hook(REGISTERS* R)
-        {
-            try
-            {
-                var pItem = (Pointer<FactoryClass>)R->ESI;
-                ProgressAddCallback?.Invoke(pItem);
-                
-            }catch(Exception ex){
-                Logger.PrintException(ex);
-            }
-            return 0;
-        }
+
+        public static Action<Pointer<FactoryClass>> ProgressUpdateCallback ;
+        public static Action<Pointer<FactoryClass>> CreateCallback ;
+        public static Action<Pointer<FactoryClass>> DemandProductionCallback ;
+        public static Action<Pointer<FactoryClass>> SetDurationCallback;   //setDuration之后
+
 
 
         public static unsafe uint FactoryClass_Create_Hook(REGISTERS* R)
@@ -270,5 +259,58 @@ namespace PatcherYRpp
             }
             return 0;
         }
+        public static bool CompleteProdution(Pointer<FactoryClass> pFactory)
+        {
+            if (pFactory.IsNull)
+            {
+                return false;   
+            }
+            if (pFactory.Ref.Owner.IsNull)
+            {
+                return false;
+            }
+            
+            if (pFactory.Ref.Owner.Ref.Money >= pFactory.Ref.Balance)
+            {
+                pFactory.Ref.Production.Value = 54;
+                if (pFactory.Ref.Object.IsNotNull)
+                {
+                    pFactory.Ref.Owner.Ref.TakeMoney(pFactory.Ref.Balance);
+                }
+                
+                pFactory.Ref.Balance = 0;
+                pFactory.Ref.Production.HasChanged = 1;
+                pFactory.Ref.IsDifferent = 1;
+                pFactory.Ref.IsSuspended = 1;
+                pFactory.Ref.Production.Step = Game.CurrentFrame;
+                pFactory.Ref.Production.Timer.Duration = 0;
+                pFactory.Ref.Production.Timer.Base = new TimerStruct();
+            
+                return true;
+            }
+            else
+            {
+                pFactory.Ref.Production.Value = 53;
+                pFactory.Ref.OnHold = 1;
+                return false;
+            }
+        }
+        public static unsafe uint FactoryClass_ProgressUpdate_Hook(REGISTERS* R)
+        {
+            try
+            {
+                var pItem = (Pointer<FactoryClass>)R->ECX;
+                if (pItem.Ref.Production.Value != 54 && pItem.Ref.SpecialItem == -1)
+                {
+                    ProgressUpdateCallback?.Invoke(pItem);
+                }
+              
+                
+            }catch(Exception ex){
+                Logger.PrintException(ex);
+            }
+            return 0;
+        }
+
     }
 }

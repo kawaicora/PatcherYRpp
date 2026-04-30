@@ -84,9 +84,9 @@ namespace PatcherYRpp
             return this.GetTimeLeft() > 0;
         }
 
-        public int StartTime;
-        public int gap;
-        public int TimeLeft;
+        public int StartTime;   
+        public int gap;     
+        public int TimeLeft;  
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -109,8 +109,8 @@ namespace PatcherYRpp
             Base.Start(this.Duration);
         }
 
-        public TimerStruct Base;
-        public int Duration;
+        public TimerStruct Base;       //Offset 48
+        public int Duration;  //Offset 56
     }
 
 
@@ -120,11 +120,11 @@ namespace PatcherYRpp
     {
         public ProgressTimer(int duration)
         {
-            this.Value = 0;
-            this.HasChanged = false;
-            this.Step = 1;
+            this.Value = 0;   // Offset 36
+            this.HasChanged = false;  // Offset 40
+            this.Step = 1;  //Offset 44
 
-            this.Timer = new RepeatableTimerStruct(duration);
+            this.Timer = new RepeatableTimerStruct(duration);  //Offset 48 
         }
 
         public void Start(int duration)
@@ -157,8 +157,8 @@ namespace PatcherYRpp
             return this.HasChanged;
         }
 
-        public int Value; // the current value
-        public Bool HasChanged; // if the timer expired this frame and the value changed
+        public int Value; // Offset 36  // the current value
+        public Bool HasChanged; // Offset 44 // if the timer expired this frame and the value changed  
         public RepeatableTimerStruct Timer;
         public int Step; // added to value every time the timer expires
     }

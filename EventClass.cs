@@ -214,7 +214,6 @@ namespace PatcherYRpp
         [FieldOffset(0)] public Place Place;
         [FieldOffset(0)] public SpecialPlace SpecialPlace;
         [FieldOffset(0)] public Specific Specific;
-        
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 104)]
@@ -281,7 +280,18 @@ namespace PatcherYRpp
         [FieldOffset(8)] public int IsNaval;
         [FieldOffset(12)] public byte ExtraData;
     }
+    
+    [StructLayout(LayoutKind.Explicit, Size = 104)]
+    public struct ProductionDuration
+    {
+        [FieldOffset(0)] public int RTTI_ID;
+        [FieldOffset(4)] public int Heap_ID;
+        [FieldOffset(8)] public int IsNaval;
 
+        [FieldOffset(12)] public int Duration;
+        [FieldOffset(16)] public byte ExtraData;
+    }
+    
     [StructLayout(LayoutKind.Explicit, Size = 104)]
     public struct UnknownLongLong
     {
