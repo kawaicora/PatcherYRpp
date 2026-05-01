@@ -102,7 +102,7 @@ namespace PatcherYRpp
         }
 
 
-
+        [FieldOffset(0)] public GScreenClass Base;
         [FieldOffset(312)] public DynamicVectorClass<Pointer<CellClass>> Cells;
 
         [FieldOffset(4444)] public DynamicVectorClass<CellStruct> TaggedCells;

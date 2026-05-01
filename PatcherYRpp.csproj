@@ -99,10 +99,12 @@
     <Compile Include="FileSystem.cs" />
     <Compile Include="FlyLocomotionClass.cs" />
     <Compile Include="FootClass.cs" />
+    <Compile Include="GadgetClass.cs" />
     <Compile Include="GameOptionsClass.cs" />
     <Compile Include="GeneralDefinitions.cs" />
     <Compile Include="GeneralStructures.cs" />
     <Compile Include="GenericList.cs" />
+    <Compile Include="GScreenClass.cs" />
     <Compile Include="Helpers\Bool.cs" />
     <Compile Include="Helpers\COMHelpers.cs" />
     <Compile Include="Helpers\CompileTimeCheck.g.cs">
@@ -127,6 +129,7 @@
     <Compile Include="InfantryTypeClass.cs" />
     <Compile Include="Interfaces.cs" />
     <Compile Include="LaserDrawClass.cs" />
+    <Compile Include="LinkClass.cs" />
     <Compile Include="LocomotionClass.cs" />
     <Compile Include="MapClass.cs" />
     <Compile Include="MessageListClass.cs" />
